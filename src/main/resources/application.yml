@@ -1,7 +1,15 @@
 spring:
   application:
-    name: rest-api
+    name: /tiago-bot-client
 server:
   port : 8080
   servlet:
-    context-path: /rest-api
+    context-path: /tiago-bot-client
+bot:
+  token: complete_me
+  username: complete_me
+  recieverid: 10
+
+logging:
+  level:
+    root: DEBUG

@@ -1,4 +1,4 @@
-package io.lacrobate.spring_rest_api.status;
+package io.lacrobate.tiago.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;

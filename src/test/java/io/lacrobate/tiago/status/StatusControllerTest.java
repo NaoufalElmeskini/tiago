@@ -1,4 +1,4 @@
-package io.lacrobate.spring_rest_api.status;
+package io.lacrobate.tiago.status;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;

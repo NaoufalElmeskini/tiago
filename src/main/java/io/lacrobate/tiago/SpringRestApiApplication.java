@@ -1,12 +1,15 @@
-package io.lacrobate.spring_rest_api;
+package io.lacrobate.tiago;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
+@Slf4j
 public class SpringRestApiApplication {
+
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringRestApiApplication.class, args);

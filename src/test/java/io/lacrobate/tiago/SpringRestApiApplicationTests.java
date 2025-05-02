@@ -1,4 +1,4 @@
-package io.lacrobate.spring_rest_api;
+package io.lacrobate.tiago;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

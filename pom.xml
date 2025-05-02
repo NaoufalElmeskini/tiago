@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>io.lacrobate</groupId>
-	<artifactId>spring-rest-api</artifactId>
+	<artifactId>tiago-bot-client</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>spring-rest-api</name>
-	<description>Demo project for Spring Boot</description>
+	<name>tiago-bot-client</name>
+	<description>XXX</description>
 	<url/>
 	<licenses>
 		<license/>
@@ -33,6 +33,11 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.telegram</groupId>
+			<artifactId>telegrambots</artifactId>
+			<version>6.0.1</version>
 		</dependency>
 
 		<dependency>
