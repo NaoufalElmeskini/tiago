@@ -1,10 +1,28 @@
 spring:
   application:
-    name: /tiago-bot-client
+    name: /tiago-api
+  security:
+    user:
+      name: admin
+      password: password
 server:
   port : 8080
   servlet:
-    context-path: /tiago-bot-client
+    context-path: /tiago-api
+
+google:
+  application:
+    name: Google Calendar Integration
+  credentials:
+    folder:
+      path: credentials
+  tokens:
+    folder:
+      path: tokens
+  oauth:
+    callback: http://localhost:8888/Callback
+
+# telegram bot
 bot:
   token: complete_me
   username: complete_me
@@ -12,4 +30,4 @@ bot:
 
 logging:
   level:
-    root: DEBUG
+    root: info

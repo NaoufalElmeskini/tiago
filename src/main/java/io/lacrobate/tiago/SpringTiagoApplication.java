@@ -8,11 +8,11 @@ import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 @Slf4j
-public class SpringRestApiApplication {
+public class SpringTiagoApplication {
 
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringRestApiApplication.class, args);
+		SpringApplication.run(SpringTiagoApplication.class, args);
 	}
 
 	@Bean
