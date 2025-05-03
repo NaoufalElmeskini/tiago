@@ -1,8 +1,6 @@
 # Intégration Google Calendar avec Spring Boot
 
-(wip) Ce projet permet de :
-- ajouter des evenemnts à son calendrier Google Calendar à partir d'un message de format flexible sur Telegram
-  - ex : "ajouter l'evenement 'Anniversaire de Sara' dans mon calndrier, demain de 18h à 20h"
+Ce projet permet d'ajouter un événement statique "anniversaire Smael 28 mai 2025" à Google Calendar en utilisant Spring Boot.
 
 ## Prérequis
 
@@ -11,7 +9,18 @@
 - Compte Google
 
 ## Configuration des Credentials Google
-[Configuration Google](gCalendar.readme)
+
+Avant de pouvoir exécuter l'application, vous devez créer des credentials OAuth2 sur la console Google Cloud :
+
+1. Accédez à [Google Cloud Console](https://console.cloud.google.com/)
+2. Créez un nouveau projet
+3. Activez l'API Google Calendar pour ce projet
+4. Créez des identifiants OAuth 2.0
+    - Type d'application : Application de bureau
+5. Téléchargez le fichier JSON des credentials
+6. Créez un dossier `credentials` à la racine du projet
+7. Copiez le fichier JSON téléchargé dans ce dossier et renommez-le en `credentials.json`
+8. Créez également un dossier `tokens` à la racine pour stocker les tokens d'accès
 
 ## Structure du projet
 
