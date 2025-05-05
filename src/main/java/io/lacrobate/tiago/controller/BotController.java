@@ -1,7 +1,7 @@
 package io.lacrobate.tiago.controller;
 
-import io.lacrobate.tiago.bot.Bot;
-import io.lacrobate.tiago.bot.BotProperties;
+import io.lacrobate.tiago.adapter.bot.Bot;
+import io.lacrobate.tiago.adapter.bot.BotProperties;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

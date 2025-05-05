@@ -1,4 +1,4 @@
-package io.lacrobate.tiago.adapter;
+package io.lacrobate.tiago.adapter.googlecal;
 
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
@@ -28,14 +28,14 @@ public class GoogleCalendarService {
     private String applicationName;
 
     @Autowired
-    private GoogleOAuthService googleOAuthService;
+    private GoogleAuthService googleAuthService;
 
     /**
      * Crée un client pour l'API Google Calendar
      */
     private Calendar getCalendarService() throws IOException, GeneralSecurityException {
         final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
-        Credential credentials = googleOAuthService.getCredentials();
+        Credential credentials = googleAuthService.getCredentials();
         return new Calendar.Builder(HTTP_TRANSPORT, JSON_FACTORY, credentials)
                 .setApplicationName(applicationName)
                 .build();

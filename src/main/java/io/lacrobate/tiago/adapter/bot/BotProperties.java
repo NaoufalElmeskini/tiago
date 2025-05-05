@@ -1,4 +1,4 @@
-package io.lacrobate.tiago.bot;
+package io.lacrobate.tiago.adapter.bot;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
