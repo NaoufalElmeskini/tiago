@@ -14,8 +14,8 @@ google:
   application:
     name: Google Calendar Integration
   credentials:
-    folder:
-      path: credentials
+    folderpath: credentials
+    filename: "credentials.json"
   tokens:
     folder:
       path: tokens

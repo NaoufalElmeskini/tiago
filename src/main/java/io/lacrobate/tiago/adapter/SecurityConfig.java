@@ -14,11 +14,13 @@ public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http
-				.csrf(csrf -> csrf.disable())
-				.authorizeHttpRequests(authz -> authz
+				.csrf().disable()
+				.authorizeRequests()
 						.requestMatchers("/calendar/**").authenticated()
 						.requestMatchers("/status").permitAll()
-						.anyRequest().authenticated())
+						.requestMatchers("/googleauth/**").authenticated()
+						.anyRequest().authenticated()
+				.and()
 				.httpBasic();
 
 		return http.build();

@@ -1,4 +1,4 @@
-package io.lacrobate.tiago.bot;
+package io.lacrobate.tiago.adapter.bot;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
