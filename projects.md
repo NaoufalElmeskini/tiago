@@ -12,7 +12,7 @@ Suivi du projet MVP basé sur Model - Contexte - Protocole.
 | MVP-003 | Créer bot Telegram          | ✅ Fait ([@github/tiag-telegram-bot](https://github.com/NaoufalElmeskini/tiag-telegram-bot)) |
 | MVP-004 | Réception/logs messages     |                                                                                             |
 | MVP-005 | AgendaService               |                                                                                             |
-| MVP-006 | Connexion Google Calendar   |                                                                                             |
+| MVP-006 | Connexion Google Calendar   | ✅ Fait                                                                                            |
 | MVP-007 | Ajouter événement agenda    | ✅ Fait                                                                                            |
 | MVP-008 | Lister événements agenda    |                                                                                             |
 | MVP-009 | Mapper intents agenda       |                                                                                             |

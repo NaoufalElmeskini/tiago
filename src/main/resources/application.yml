@@ -1,3 +1,8 @@
+server:
+  port : 8080
+  servlet:
+    context-path: /tiago-api
+
 spring:
   application:
     name: /tiago-api
@@ -5,10 +10,10 @@ spring:
     user:
       name: admin
       password: password
-server:
-  port : 8080
-  servlet:
-    context-path: /tiago-api
+  ai:
+    openai:
+      api-key: ${OPENAI_API_KEY}
+      model: gpt-3.5-turbo
 
 google:
   application:
