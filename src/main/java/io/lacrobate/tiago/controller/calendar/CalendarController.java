@@ -1,6 +1,6 @@
-package io.lacrobate.tiago.controller;
+package io.lacrobate.tiago.controller.calendar;
 
-import io.lacrobate.tiago.adapter.googlecal.GoogleCalendarService;
+import io.lacrobate.tiago.adapter.calendar.GoogleCalendarService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

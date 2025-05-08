@@ -1,6 +1,6 @@
-package io.lacrobate.tiago.controller;
+package io.lacrobate.tiago.controller.calendar;
 
-import io.lacrobate.tiago.adapter.googlecal.GoogleAuthService;
+import io.lacrobate.tiago.adapter.calendar.GoogleAuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

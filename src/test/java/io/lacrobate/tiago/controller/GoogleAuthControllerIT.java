@@ -1,6 +1,6 @@
 package io.lacrobate.tiago.controller;
 
-import io.lacrobate.tiago.adapter.googlecal.GoogleAuthService;
+import io.lacrobate.tiago.adapter.calendar.GoogleAuthService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -26,7 +26,6 @@ class GoogleAuthControllerIT extends CommonITUtils {
 
 		@Autowired
 		private MockMvc mockMvc;
-
 
 		@Test
 		@DisplayName("should return 401 when I get (Google) authentication status as non authenticated user")
