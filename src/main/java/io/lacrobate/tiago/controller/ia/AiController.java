@@ -1,7 +1,6 @@
-package io.lacrobate.tiago.controller;
+package io.lacrobate.tiago.controller.ia;
 
-import io.lacrobate.tiago.adapter.ia.AiResponse;
-import io.lacrobate.tiago.adapter.ia.IaModelPort;
+import io.lacrobate.tiago.domain.AiModelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,25 +11,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/ia")
 public class AiController {
+
 	@Autowired
-	private IaModelPort aiService;
-	@PostMapping(value = "/general",
-			consumes = "application/json",
-			produces = "application/json")
-	public ResponseEntity<AiResponse> ask(@RequestBody AiRequest request) {
-		return ResponseEntity.ofNullable(
-				aiService.processQuery(request.message()));
-	}
+	private AiModelService service;
 
 	@PostMapping(value = "/eventstructure",
 			consumes = "application/json",
 			produces = "application/json")
 	public ResponseEntity<AiResponse> getEvent(@RequestBody AiRequest request) {
 		return ResponseEntity.ofNullable(
-				aiService.processQuery(request.message()));
+				new AiResponse(service.processEventfrom(request.message())));
 	}
-
-
-
 
 }

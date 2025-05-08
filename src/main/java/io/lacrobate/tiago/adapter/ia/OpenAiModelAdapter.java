@@ -1,6 +1,8 @@
 package io.lacrobate.tiago.adapter.ia;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.lacrobate.tiago.domain.AiExceptionException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.ChatClient;
 import org.springframework.ai.chat.ChatResponse;
 import org.springframework.ai.chat.messages.Message;
@@ -14,7 +16,8 @@ import java.util.List;
 
 @Service
 @Qualifier("eventExtractor")
-public class OpenIaModelAdapter implements IaModelPort {
+@Slf4j
+public class OpenAiModelAdapter implements AiModelPort {
     private final ChatClient chatClient;
     private final ObjectMapper objectMapper;
 
@@ -41,14 +44,14 @@ public class OpenIaModelAdapter implements IaModelPort {
         - Sortie: {"titre":"Anniversaire de Sara","startDate":"2025-05-08T15:00:00","endDate":"2025-05-08T16:00:00","description":"Anniversaire de Sara"}
         """;
 
-    public OpenIaModelAdapter(ChatClient chatClient, ObjectMapper objectMapper) {
+    public OpenAiModelAdapter(ChatClient chatClient, ObjectMapper objectMapper) {
         this.chatClient = chatClient;
         this.objectMapper = objectMapper;
     }
 
 
     @Override
-    public AiResponse processQuery(String query) {
+    public EventData processQuery(String query) {
         SystemMessage systemMessage = new SystemMessage(SYSTEM_PROMPT);
         UserMessage userMessage = new UserMessage(query);
 
@@ -60,7 +63,7 @@ public class OpenIaModelAdapter implements IaModelPort {
         return processJson(response);
     }
 
-    private AiResponse processJson(ChatResponse response) {
+    private EventData processJson(ChatResponse response) {
         String jsonContent = response.getResult().getOutput().getContent().trim();
 
         // Nettoyer la réponse au cas où le modèle ajoute des backticks ou des marqueurs de code
@@ -69,9 +72,10 @@ public class OpenIaModelAdapter implements IaModelPort {
         try {
             // Valider que c'est un JSON valide en le désérialisant (optional)
             EventData eventData = objectMapper.readValue(jsonContent, EventData.class);
-            return new AiResponse(jsonContent);
+            return eventData;
         } catch (Exception e) {
-            return new AiResponse("{\"error\":\"Impossible de parser la réponse en JSON valide\"}");
+            log.error("{\"error\":\"Impossible de parser la réponse en JSON valide\"}");
+            throw new AiExceptionException(e);
         }
     }
 
