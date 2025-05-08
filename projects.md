@@ -5,21 +5,22 @@ Suivi du projet MVP basé sur Model - Contexte - Protocole.
 
 ## 🛠️ Progrès global
 
-| Code    | Titre                       | Statut (🚧 En cours / ✅ Fait / ⏳ À faire)                                                   |
-| :------ | :-------------------------- | :------------------------------------------------------------------------------------------ |
-| MVP-001 | Initialiser projet AgentAPI | ✅ Fait                                                                                            |
-| MVP-002 | Définir MCP v1              |                                                                                             |
-| MVP-003 | Créer bot Telegram          | ✅ Fait ([@github/tiag-telegram-bot](https://github.com/NaoufalElmeskini/tiag-telegram-bot)) |
-| MVP-004 | Réception/logs messages     |                                                                                             |
-| MVP-005 | AgendaService               |                                                                                             |
-| MVP-006 | Connexion Google Calendar   | ✅ Fait                                                                                            |
-| MVP-007 | Ajouter événement agenda    | ✅ Fait                                                                                            |
-| MVP-008 | Lister événements agenda    |                                                                                             |
-| MVP-009 | Mapper intents agenda       |                                                                                             |
-| MVP-010 | Service IA                  |                                                                                             |
-| MVP-011 | Définir prompts IA          |                                                                                             |
-| MVP-012 | Mapper intents IA           |                                                                                             |
-| MVP-013 | Dispatcher vers services    |                                                                                             |
+| Code    | Titre                                                    | Statut (🚧 En cours / ✅ Fait / ⏳ À faire)                                                   |
+|:--------|:---------------------------------------------------------| :------------------------------------------------------------------------------------------ |
+| MVP-001 | Initialiser projet AgentAPI                              | ✅ Fait                                                                                            |
+| MVP-002 | Définir MCP v1                                           |                                                                                             |
+| MVP-003 | Créer bot Telegram                                       | ✅ Fait ([@github/tiag-telegram-bot](https://github.com/NaoufalElmeskini/tiag-telegram-bot)) |
+| MVP-004 | Réception/logs messages                                  |                                                                                             |
+| MVP-005 | AgendaService                                            |                                                                                             |
+| MVP-006 | Connexion Google Calendar                                | ✅ Fait                                                                                            |
+| MVP-007 | Ajouter événement agenda                                 | ✅ Fait                                                                                            |
+| MVP-008 | Lister événements agenda                                 |                                                                                             |
+| MVP-009 | Mapper intents agenda                                    |                                                                                             |
+| MVP-010 | Service IA                                               | ✅ Fait                                                                                             |
+| MVP-011 | Définir prompts IA                                       | ✅ Fait                                                                                            |
+| MVP-012 | Mapper intents IA                                        |                                                                                             |
+| MVP-013 | Dispatcher vers services                                 |                                                                                             |
+| MVP-014 | Ajouter un event depuis Telegram (integrer scenario e2e) |                                                                                             |
 
 ---
 ## 📅 Semaine 1 — Base technique
