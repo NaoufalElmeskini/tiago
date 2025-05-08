@@ -9,11 +9,13 @@
         <outputRelativeToContentRoot value="true" />
         <module name="spring-rest-api" />
         <module name="tiago-bot-client" />
+        <module name="spring-ai-demo" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="spring-ai-demo" options="-parameters" />
       <module name="spring-rest-api" options="-parameters" />
       <module name="tiago-bot-client" options="-parameters" />
     </option>
