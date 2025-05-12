@@ -1,6 +1,6 @@
 package io.lacrobate.tiago.adapter.ia;
 
-import io.lacrobate.tiago.controller.ia.AiResponse;
+import io.lacrobate.tiago.application.ia.AiResponse;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 

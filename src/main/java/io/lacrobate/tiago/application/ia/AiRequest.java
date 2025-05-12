@@ -1,4 +1,4 @@
-package io.lacrobate.tiago.controller.ia;
+package io.lacrobate.tiago.application.ia;
 
 public record AiRequest(String message) {
 }

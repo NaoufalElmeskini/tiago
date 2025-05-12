@@ -2,12 +2,6 @@
 
 Ce projet permet d'ajouter un événement statique "anniversaire Smael 28 mai 2025" à Google Calendar en utilisant Spring Boot.
 
-## Prérequis
-
-- Java 21
-- Maven
-- Compte Google
-
 ## Configuration des Credentials Google
 
 Avant de pouvoir exécuter l'application, vous devez créer des credentials OAuth2 sur la console Google Cloud :
@@ -22,23 +16,6 @@ Avant de pouvoir exécuter l'application, vous devez créer des credentials OAut
 7. Copiez le fichier JSON téléchargé dans ce dossier et renommez-le en `credentials.json`
 8. Créez également un dossier `tokens` à la racine pour stocker les tokens d'accès
 
-## Structure du projet
-
-```
-root/
-├── src/
-│   └── main/
-│       ├── java/
-│       │   └── (...)
-│       │         ├── (...)
-│                 └── SpringApplication.java
-│       └── resources/
-│           └── application.yml
-├── credentials/
-│   └── credentials.json (à ajouter)
-├── tokens/ (dossier pour stocker automatiquement les tokens OAuth)
-└── pom.xml
-```
 
 ## Démarrage
 
@@ -48,8 +25,8 @@ root/
    ```
    mvn spring-boot:run
    ```
-4. **Important - Nouvelle procédure d'authentification** :
-    - Accédez d'abord à l'URL : `http://localhost:8080/api/auth/authorize`
+4. **Important - procédure d'authentification** :
+    - Accédez d'abord à l'URL : `http://localhost:8080/tiago-api/auth/authorize`
       (Identifiants par défaut: admin/password)
     - Suivez le processus d'autorisation dans votre navigateur
     - Assurez-vous que le redirect_uri configuré dans la console Google Cloud est **exactement** : `http://localhost:8888/Callback`

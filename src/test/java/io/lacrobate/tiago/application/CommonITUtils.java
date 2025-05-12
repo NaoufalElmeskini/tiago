@@ -1,4 +1,4 @@
-package io.lacrobate.tiago.controller;
+package io.lacrobate.tiago.application;
 
 import lombok.extern.slf4j.Slf4j;
 

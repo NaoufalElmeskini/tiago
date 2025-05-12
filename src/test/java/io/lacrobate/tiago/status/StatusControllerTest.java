@@ -1,6 +1,6 @@
 package io.lacrobate.tiago.status;
 
-import io.lacrobate.tiago.controller.CommonITUtils;
+import io.lacrobate.tiago.application.CommonITUtils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

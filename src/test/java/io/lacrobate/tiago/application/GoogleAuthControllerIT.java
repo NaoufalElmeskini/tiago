@@ -1,4 +1,4 @@
-package io.lacrobate.tiago.controller;
+package io.lacrobate.tiago.application;
 
 import io.lacrobate.tiago.adapter.calendar.GoogleAuthService;
 import org.junit.jupiter.api.DisplayName;

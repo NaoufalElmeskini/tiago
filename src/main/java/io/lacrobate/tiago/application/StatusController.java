@@ -1,4 +1,4 @@
-package io.lacrobate.tiago.controller;
+package io.lacrobate.tiago.application;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;

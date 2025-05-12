@@ -1,4 +1,4 @@
-package io.lacrobate.tiago.controller;
+package io.lacrobate.tiago.application;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

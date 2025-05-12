@@ -1,4 +1,4 @@
-package io.lacrobate.tiago.controller.ia;
+package io.lacrobate.tiago.application.ia;
 
 import io.lacrobate.tiago.adapter.ia.EventData;
 
