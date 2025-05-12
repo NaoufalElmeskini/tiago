@@ -1,6 +1,8 @@
 package io.lacrobate.tiago.application.ia;
 
-import io.lacrobate.tiago.adapter.ia.EventData;
+import io.lacrobate.tiago.adapter.ia.Event;
+import lombok.Builder;
 
-public record AiResponse(EventData result) {
+@Builder
+public record AiResponse(Event result) {
 }

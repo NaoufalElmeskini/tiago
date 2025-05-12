@@ -31,9 +31,10 @@ io.lacrobate.tiago/
 
 ### Variables d'environnement requises
 
-| Variable | Description |
-|----------|-------------|
-| `OPENAI_API_KEY` | **Obligatoire**. Clé API pour accéder aux services OpenAI |
+| Variable          | Description                                               |
+|-------------------|-----------------------------------------------------------|
+| `OPENAI_API_KEY`  | **Obligatoire**. Clé API pour accéder aux services OpenAI |
+| `xxx`, `xx`, `xx` | **Obligatoire**. Token pour accéder aux services Telegram |
 
 ### Configuration Google Calendar
 
@@ -59,7 +60,7 @@ liste complete : [http-collection](http-collection)
 - `GET /tiago-api/auth/authorize` : Initie le processus d'autorisation OAuth2
 - `GET /tiago-api/auth/status` : Vérifie le statut de l'autorisation
 - `GET /tiago-api/auth/clear` : Supprime les tokens stockés pour forcer une nouvelle autorisation
-- `GET /tiago-api/calendar/add-birthday` : Ajoute l'événement d'anniversaire de Smael au calendrier Google
+- `GET /tiago-api/calendar/add-event-demo` : Ajoute l'événement d'anniversaire de Smael au calendrier Google
 
 ## 🤝 Contribution
 Les contributions sont les bienvenues ! N'hésitez pas à ouvrir une issue ou une pull request.

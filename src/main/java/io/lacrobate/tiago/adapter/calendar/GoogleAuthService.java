@@ -34,7 +34,7 @@ public class GoogleAuthService {
             return "Erreur lors de l'autorisation: " + e.getMessage();
         }
     }
-    
+
     /**
      * Vérifie l'état actuel de l'autorisation
      */

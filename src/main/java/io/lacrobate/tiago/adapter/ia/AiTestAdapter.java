@@ -1,33 +1,24 @@
-package io.lacrobate.tiago.application.calendar;
+package io.lacrobate.tiago.adapter.ia;
 
 import com.google.api.client.util.DateTime;
-import io.lacrobate.tiago.adapter.calendar.CalendarPort;
-import io.lacrobate.tiago.adapter.ia.Event;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 
+@Service
+@Qualifier("eventExtractor")
+@Profile("dev")
 @Slf4j
-@RestController
-@RequestMapping("/calendar")
-@RequiredArgsConstructor
-public class CalendarController {
+public class AiTestAdapter implements AiModelPort {
 
-    @Autowired
-    private CalendarPort calendarPort;
-
-    @GetMapping("/add-event-demo")
-    public String addDemoEvent() {
-        log.info("Adding birthday event...");
-        Event demoEvent = event();
-        return calendarPort.ajouterEvent(demoEvent);
+    @Override
+    public Event processQuery(String message) {
+        return event();
     }
 
     public static Event event() {
@@ -41,6 +32,7 @@ public class CalendarController {
                 .endDate(end.toString())
                 .build();
     }
+
     private static DateTime dateTime(int year, int month, int dayOfMonth, int hour) {
         LocalDateTime startDateTime = LocalDateTime.of(year, month, dayOfMonth, hour, 0);
         Date date = Date.from(startDateTime.atZone(ZoneId.systemDefault()).toInstant());

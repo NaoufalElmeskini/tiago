@@ -10,12 +10,14 @@ import org.springframework.ai.chat.messages.SystemMessage;
 import org.springframework.ai.chat.messages.UserMessage;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 @Qualifier("eventExtractor")
+@Profile("production")
 @Slf4j
 public class OpenAiModelAdapter implements AiModelPort {
     private final ChatClient chatClient;
@@ -51,7 +53,7 @@ public class OpenAiModelAdapter implements AiModelPort {
 
 
     @Override
-    public EventData processQuery(String query) {
+    public Event processQuery(String query) {
         SystemMessage systemMessage = new SystemMessage(SYSTEM_PROMPT);
         UserMessage userMessage = new UserMessage(query);
 
@@ -63,7 +65,7 @@ public class OpenAiModelAdapter implements AiModelPort {
         return processJson(response);
     }
 
-    private EventData processJson(ChatResponse response) {
+    private Event processJson(ChatResponse response) {
         String jsonContent = response.getResult().getOutput().getContent().trim();
 
         // Nettoyer la réponse au cas où le modèle ajoute des backticks ou des marqueurs de code
@@ -71,8 +73,8 @@ public class OpenAiModelAdapter implements AiModelPort {
 
         try {
             // Valider que c'est un JSON valide en le désérialisant (optional)
-            EventData eventData = objectMapper.readValue(jsonContent, EventData.class);
-            return eventData;
+            Event event = objectMapper.readValue(jsonContent, Event.class);
+            return event;
         } catch (Exception e) {
             log.error("{\"error\":\"Impossible de parser la réponse en JSON valide\"}");
             throw new AiExceptionException(e);

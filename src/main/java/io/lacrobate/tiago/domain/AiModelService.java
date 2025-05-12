@@ -1,7 +1,7 @@
 package io.lacrobate.tiago.domain;
 
-import io.lacrobate.tiago.adapter.ia.EventData;
+import io.lacrobate.tiago.adapter.ia.Event;
 
 public interface AiModelService {
-	EventData processEventfrom(String message);
+	Event processEventfrom(String message);
 }

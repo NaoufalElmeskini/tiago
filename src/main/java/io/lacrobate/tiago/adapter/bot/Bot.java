@@ -1,5 +1,8 @@
 package io.lacrobate.tiago.adapter.bot;
 
+import io.lacrobate.tiago.adapter.calendar.CalendarPort;
+import io.lacrobate.tiago.adapter.ia.AiModelPort;
+import io.lacrobate.tiago.adapter.ia.Event;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -13,6 +16,8 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 @Service
 public class Bot extends TelegramLongPollingBot {
 	private final BotProperties botProperties;
+	private final AiModelPort iaPort;
+	private final CalendarPort calendarPort;
 
 	@Override
 	public String getBotUsername() {
@@ -27,6 +32,9 @@ public class Bot extends TelegramLongPollingBot {
 	@Override
 	public void onUpdateReceived(Update update) {
 		log.info("Message received: " + update);
+		Event event = iaPort.processQuery(update.getMessage().getText());
+		String result = calendarPort.ajouterEvent(event);
+		sendText(update.getMessage().getChatId(), result);
 	}
 
 	public void sendText(Long who, String what){

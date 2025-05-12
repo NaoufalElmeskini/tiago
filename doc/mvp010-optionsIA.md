@@ -93,7 +93,7 @@ Claude répond à cette question :
 contexte : 
 j'ai une application Spring Boot et je veux explorer les API d'IA simple d'utilisation.
 1. version 0 : je veux ajouter une fonctionnalité qui répond à l'utilisateur la capitale d'un pays donné. exemple input "capitale de France ?" output "Paris".
-2. version 1 : je veux ajouter une fonctionnalité qui transforme une phrase, en objet Json ayant une structure bien définie. exemple : "ajouter l'evenement Anniversaire de Sara, de 15h à 16h demain." devrait retourner Event{titre, startDate, endDate, description} contenant les bonnes infos. je crois qu'à l'aide d'un bon prompt et d'une bonne API d'IA on peut faire ça facilement. ?
+2. version 1 : je veux ajouter une fonctionnalité qui transforme une phrase, en objet Json ayant une structure bien définie. exemple : "²" devrait retourner Event{titre, startDate, endDate, description} contenant les bonnes infos. je crois qu'à l'aide d'un bon prompt et d'une bonne API d'IA on peut faire ça facilement. ?
 
 je veux en priorité des solutions gratuites, même s'ils ont des limitations. sinon les moins chere en terme qualité/prix.
 
