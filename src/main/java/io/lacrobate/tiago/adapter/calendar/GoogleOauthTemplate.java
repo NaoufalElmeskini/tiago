@@ -26,7 +26,7 @@ import java.util.List;
 public class GoogleOauthTemplate {
 	private  static final JsonFactory JSON_FACTORY = GsonFactory.getDefaultInstance();
 	private static final List<String> SCOPES = Collections.singletonList(CalendarScopes.CALENDAR);
-	private static final String DEFAULT_USER_ID = "user";
+	public static final String DEFAULT_USER_ID = "user";
 
 	@Value("${google.tokens.folder.path}")
 	private String tokensFolderPath;

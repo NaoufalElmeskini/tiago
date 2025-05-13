@@ -1,6 +1,6 @@
 package io.lacrobate.tiago.application;
 
-import io.lacrobate.tiago.adapter.calendar.GoogleAuthService;
+import io.lacrobate.tiago.adapter.calendar.GoogleCalendarTemplate;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -19,7 +19,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 @AutoConfigureMockMvc
 class GoogleAuthControllerIT extends CommonITUtils {
 	@MockBean
-	private GoogleAuthService googleAuthService;
+	private GoogleCalendarTemplate googleCalendarTemplate;
 
 	@Nested
 	class AsNonAuthenticatedUser {
@@ -45,7 +45,7 @@ class GoogleAuthControllerIT extends CommonITUtils {
 		public void whenITryToGetAuthStatus() {
 			restTemplate = new TestRestTemplate("admin", "password");
 			restTemplate.getForObject(createUrl("/googleauth/status"), String.class);
-			verify(googleAuthService).checkAuthorizationStatus();
+			verify(googleCalendarTemplate).checkAuthorizationStatus();
 		}
 
 		@Test
@@ -53,7 +53,7 @@ class GoogleAuthControllerIT extends CommonITUtils {
 		public void whenITryToGetAuthorized() {
 			restTemplate = new TestRestTemplate("admin", "password");
 			restTemplate.getForObject(createUrl("/googleauth/authorize"), String.class);
-			verify(googleAuthService).initiateAuthorization();
+			verify(googleCalendarTemplate).initiateAuthorization();
 		}
 
 		@Test
@@ -61,7 +61,7 @@ class GoogleAuthControllerIT extends CommonITUtils {
 		public void whenITryToClearAuth() {
 			restTemplate = new TestRestTemplate("admin", "password");
 			restTemplate.getForObject(createUrl("/googleauth/clear"), String.class);
-			verify(googleAuthService).clearStoredCredentials();
+			verify(googleCalendarTemplate).clearStoredCredentials();
 		}
 	}
 }

@@ -45,7 +45,7 @@ collection:
         send: true
         store: true
       rebuildPath: true
-  - url: http://localhost:8080/tiago-api/calendar/add-birthday
+  - url: http://localhost:8080/tiago-api/calendar/add-event-demo
     name: calendar/add
     meta:
       id: req_4d6fd0137b214ce298c42a7d025f85d7

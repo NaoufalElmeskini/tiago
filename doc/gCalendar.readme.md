@@ -33,7 +33,7 @@ Avant de pouvoir exécuter l'application, vous devez créer des credentials OAut
     - Une fois autorisé, vous verrez un message de confirmation
 5. Une fois correctement autorisé, accédez à l'endpoint pour créer l'événement d'anniversaire :
    ```
-   http://localhost:8080/api/calendar/add-birthday
+   http://localhost:8080/api/calendar/add-event-demo
    ```
 
 ## Points d'accès API
@@ -41,4 +41,4 @@ liste complete : [http-collection](http-collection)
 - `GET /tiago-api/auth/authorize` : Initie le processus d'autorisation OAuth2
 - `GET /tiago-api/auth/status` : Vérifie le statut de l'autorisation
 - `GET /tiago-api/auth/clear` : Supprime les tokens stockés pour forcer une nouvelle autorisation
-- `GET /tiago-api/calendar/add-birthday` : Ajoute l'événement d'anniversaire de Smael au calendrier Google
+- `GET /tiago-api/calendar/add-event-demo` : Ajoute l'événement d'anniversaire de Smael au calendrier Google
