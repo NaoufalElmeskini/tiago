@@ -1,7 +1,6 @@
 package io.lacrobate.tiago.application;
 
 import io.lacrobate.tiago.adapter.bot.Bot;
-import io.lacrobate.tiago.adapter.bot.BotProperties;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -18,7 +17,7 @@ import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 @RequiredArgsConstructor
 public class BotController {
 	private final Bot bot;
-	private final BotProperties botProperties;
+
 
 	@GetMapping("/ping")
 	public String ping() {
@@ -30,7 +29,7 @@ public class BotController {
 		log.info("Bot registring...");
 		TelegramBotsApi botsApi = new TelegramBotsApi(DefaultBotSession.class);
 		botsApi.registerBot(bot);
-		bot.sendText(botProperties.getRecieverid(), "Hello World!");
+		bot.sendText( "Hello World!");
 		return HttpStatus.OK;
 	}
 }

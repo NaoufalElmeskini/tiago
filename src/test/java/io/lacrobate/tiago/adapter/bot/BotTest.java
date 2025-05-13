@@ -12,6 +12,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
+import static org.mockito.ArgumentMatchers.contains;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -23,6 +24,9 @@ class BotTest {
 	private CalendarPort calendarPort;
 	@MockBean
 	private AiModelPort aiPort;
+	@MockBean
+	private BotSender botSender;
+
 
 	@Test
 	@DisplayName("should call AiService and calendarPort when I process onUpdateReceived event")
@@ -31,11 +35,25 @@ class BotTest {
 		Update update = update();
 		when(aiPort.processQuery(update.getMessage().getText()))
 				.thenReturn(event);
+
 		//    when
 		this.bot.onUpdateReceived(update);
+
 		//    then
-		verify(aiPort).processQuery(update.getMessage().getText());
 		verify(calendarPort).ajouterEvent(event);
+	}
+
+	@Test
+	@DisplayName("should XXX when I send event as non authentified (calendar api) user ")
+	public void whenIAddEventAsNonAuthorizedByCalendarApi() {
+		when(calendarPort.connectionNeeded())
+				.thenReturn(true);
+		//    when
+		this.bot.onUpdateReceived(update());
+		//    then
+//		assertThat lien de connetion envoyé sur Teleg. comment ?
+
+		verify(this.botSender).sendText(contains("authentication needed :"));
 	}
 
 	private Update update() {

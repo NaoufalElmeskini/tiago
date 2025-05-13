@@ -1,6 +1,6 @@
 package io.lacrobate.tiago.application.calendar;
 
-import io.lacrobate.tiago.adapter.calendar.GoogleAuthService;
+import io.lacrobate.tiago.adapter.calendar.GoogleCalendarTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,20 +11,20 @@ import org.springframework.web.bind.annotation.RestController;
 public class GoogleAuthController {
 
     @Autowired
-    private GoogleAuthService googleAuthService;
+    private GoogleCalendarTemplate googleCalendarTemplate;
 
     @GetMapping("/authorize")
     public String authorize() {
-        return googleAuthService.initiateAuthorization();
+        return googleCalendarTemplate.initiateAuthorization();
     }
     
     @GetMapping("/status")
     public String getAuthStatus() {
-        return googleAuthService.checkAuthorizationStatus();
+        return googleCalendarTemplate.checkAuthorizationStatus().getMessage();
     }
     
     @GetMapping("/clear")
     public String clearTokens() {
-        return googleAuthService.clearStoredCredentials();
+        return googleCalendarTemplate.clearStoredCredentials();
     }
 }
