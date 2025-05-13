@@ -34,7 +34,8 @@ io.lacrobate.tiago/
 | Variable          | Description                                               |
 |-------------------|-----------------------------------------------------------|
 | `OPENAI_API_KEY`  | **Obligatoire**. Clé API pour accéder aux services OpenAI |
-| `xxx`, `xx`, `xx` | **Obligatoire**. Token pour accéder aux services Telegram |
+| `bot_token`, `bot_username`, `bot_receiver` | **Obligatoire**. Token pour accéder aux services Telegram |
+Obtenir un token pour la premiere fois : [Documentation](https://core.telegram.org/bots/api) 
 
 ### Configuration Google Calendar
 

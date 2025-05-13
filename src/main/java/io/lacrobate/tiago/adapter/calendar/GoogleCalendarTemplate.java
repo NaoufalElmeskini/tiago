@@ -29,13 +29,12 @@ public class GoogleCalendarTemplate {
 
     private final GoogleOauthTemplate template;
 
-
     private static final JsonFactory JSON_FACTORY = GsonFactory.getDefaultInstance();
 
     @Value("${google.application.name}")
     private String applicationName;
 
-    private LocalServerReceiver receiver =
+    private final LocalServerReceiver receiver =
             new LocalServerReceiver.Builder().setPort(8888).setCallbackPath("/Callback").build();
     private GoogleAuthorizationCodeFlow flow;
 
@@ -143,6 +142,5 @@ public class GoogleCalendarTemplate {
                 applicationName).build();
         return calendar.events().insert("primary", event).execute();
     }
-
 }
 

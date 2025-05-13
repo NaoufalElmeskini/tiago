@@ -62,7 +62,9 @@ public class OpenAiModelAdapter implements AiModelPort {
 
         ChatResponse response = chatClient.call(prompt);
 
-        return processJson(response);
+        Event event = processJson(response);
+        log.info("Event extracted: " + event);
+        return event;
     }
 
     private Event processJson(ChatResponse response) {

@@ -20,7 +20,7 @@ Suivi du projet MVP basé sur Model - Contexte - Protocole.
 | MVP-011 | Définir prompts IA                                       | ✅ Fait                                                                                            |
 | MVP-012 | Mapper intents IA                                        |                                                                                             |
 | MVP-013 | Dispatcher vers services                                 |                                                                                             |
-| MVP-014 | Ajouter un event depuis Telegram (integrer scenario e2e) |                                                                                             |
+| MVP-014 | Ajouter un event depuis Telegram (integrer scenario e2e) |  ✅ Fait                                                                                           |
 
 ---
 ## 📅 Semaine 1 — Base technique

@@ -29,9 +29,9 @@ google:
 
 # telegram bot
 bot:
-  token: complete_me
-  username: complete_me
-  recieverid: 10
+  token: ${bot_token}
+  username: ${bot_username}
+  receiverid: ${bot_receiver}
 
 logging:
   level:

@@ -3,6 +3,7 @@ package io.lacrobate.tiago.adapter.ia;
 import com.google.api.client.util.DateTime;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -11,8 +12,9 @@ import java.util.Date;
 
 @Service
 @Qualifier("eventExtractor")
+@Profile("dev")
 @Slf4j
-public class AiTestAdapter implements AiModelPort {
+public class AiDevAdapter implements AiModelPort {
 
     @Override
     public Event processQuery(String message) {

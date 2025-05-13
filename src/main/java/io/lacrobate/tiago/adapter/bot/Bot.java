@@ -50,7 +50,7 @@ public class Bot extends TelegramLongPollingBot {
 	}
 
 	public void sendText(String result) {
-		sendText(botProperties.getRecieverid(), result);
+		sendText(botProperties.getReceiverid(), result);
 	}
 
 	public void sendText(Long toWho, String what) {
