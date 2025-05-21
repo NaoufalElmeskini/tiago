@@ -1,66 +1,76 @@
 package io.lacrobate.tiago.adapter.bot;
 
-import io.lacrobate.tiago.adapter.calendar.CalendarPort;
-import io.lacrobate.tiago.adapter.calendar.EventBuilders;
-import io.lacrobate.tiago.adapter.ia.AiModelPort;
-import io.lacrobate.tiago.adapter.ia.Event;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.bots.AbsSender;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-import static org.mockito.ArgumentMatchers.contains;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @SpringBootTest
 class BotTest {
 	@Autowired
 	private Bot bot;
 	@MockBean
-	private CalendarPort calendarPort;
-	@MockBean
-	private AiModelPort aiPort;
-	@MockBean
-	private BotSender botSender;
-
+	private AbsSender sender;
 
 	@Test
-	@DisplayName("should call AiService and calendarPort when I process onUpdateReceived event")
-	public void whenOnUpdateReceivedEvent() {
-		Event event = EventBuilders.event();
-		Update update = update();
-		when(aiPort.processQuery(update.getMessage().getText()))
-				.thenReturn(event);
+	@DisplayName("should XXX when I YYY")
+	public void whenITryToXXX() {
+		//    given
 
-		//    when
-		this.bot.onUpdateReceived(update);
+		/**
+		 given :
+		  as telegramUser Toto
 
-		//    then
-		verify(calendarPort).ajouterEvent(event);
+		 when
+		  0. j'envoie "gauthenticate me"
+		  1. Bot me repond "(link)"
+		  2. (automatiquement) Toto fait parvenir code à app
+
+		 then
+		  bot me repond (Toto authenticated) !
+		  et credentials stoqués dans appli
+		 */
+		envoyerMessageTelegram("gauthenticate me");
+		BotAssertor.assertMessageSent(sender, "link");
+
+
+
+		assertThat(false).isTrue();
 	}
 
-	@Test
-	@DisplayName("should XXX when I send event as non authentified (calendar api) user ")
-	public void whenIAddEventAsNonAuthorizedByCalendarApi() {
-		when(calendarPort.connectionNeeded())
-				.thenReturn(true);
-		//    when
-		this.bot.onUpdateReceived(update());
-		//    then
-//		assertThat lien de connetion envoyé sur Teleg. comment ?
-
-		verify(this.botSender).sendText(contains("authentication needed :"));
+	private void envoyerMessageTelegram(String message) {
+		bot.onUpdateReceived(update(message));
 	}
 
-	private Update update() {
+	private Update update(String text) {
 		Update update = new Update();
 		Message message = new Message();
-		message.setText("ajouter l'evenement Anniversaire de Sara, de 15h à 16h demain.");
+		message.setText(text);
 		update.setMessage(message);
 		return update;
+	}
+
+	private static class BotAssertor {
+		public static void assertMessageSent(AbsSender sender, String link) {
+			try {
+				ArgumentCaptor<SendMessage> argCaptor = ArgumentCaptor.captor();
+				verify(sender).execute(argCaptor.capture());
+				SendMessage message = argCaptor.getValue();
+				assertThat(message.getText()).contains(link);
+			} catch (TelegramApiException e) {
+				throw new RuntimeException(e);
+			}
+
+		}
 	}
 }
