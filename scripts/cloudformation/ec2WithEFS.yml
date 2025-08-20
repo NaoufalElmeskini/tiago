@@ -1,0 +1,110 @@
+#
+AWSTemplateFormatVersion: "2010-09-09"
+Description: Minimal setup to create two EC2 instances attached to an EFS.
+
+Parameters:
+  KeyName:
+    Type: String
+    Description: Key pair for SSH access to the EC2 instances.
+  VPC:
+    Type: AWS::EC2::VPC::Id
+    Description: VPC ID where the resources will be created.
+  Subnet:
+    Type: AWS::EC2::Subnet::Id
+    Description: Subnet ID for the first instance.
+
+Resources:
+  FileSystem:
+    Type: AWS::EFS::FileSystem
+    Properties:
+      Encrypted: true
+
+  MountTargetA:
+    Type: AWS::EFS::MountTarget
+    Properties:
+      FileSystemId: !Ref FileSystem
+      SubnetId: !Ref Subnet
+      SecurityGroups:
+        - !Ref EFSSecurityGroup
+        - !Ref InstanceSecurityGroup
+  #              fixme: vulnérabilité (0.0.0.0/0)
+  EFSSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Security group for EFS
+      VpcId: !Ref VPC
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 2049
+          ToPort: 2049
+          CidrIp: 0.0.0.0/0
+
+  InstanceSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Security group for EC2 instances
+      VpcId: !Ref VPC
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 2049
+          ToPort: 2049
+          SourceSecurityGroupId: !Ref EFSSecurityGroup
+  EC2InstanceA:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: t2.micro
+      AvailabilityZone: us-east-1a
+      ImageId: ami-0a3c3a20c09d6f377
+      KeyName: !Ref KeyName
+      SubnetId: !Ref Subnet
+      SecurityGroupIds:
+        - !Ref InstanceSecurityGroup
+      Tags:
+        - Key: Name
+          Value: instanceA2
+      UserData:
+        Fn::Base64: !Sub |
+          #!/bin/bash
+          yum install -y amazon-efs-utils
+          mkdir -p /mnt/efs
+          echo ${FileSystem}
+          sudo mount -t efs ${FileSystem}:/ /mnt/efs
+          echo "${FileSystem}:/ /mnt/efs efs defaults,_netdev 0 0" >> /etc/fstab
+
+  EC2InstanceB:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: t2.micro
+      AvailabilityZone: us-east-1a
+      ImageId: ami-0a3c3a20c09d6f377
+      KeyName: !Ref KeyName
+      SubnetId: !Ref Subnet
+      SecurityGroupIds:
+        - !Ref InstanceSecurityGroup
+      Tags:
+        - Key: Name
+          Value: instanceB2
+      UserData:
+        Fn::Base64:
+          !Sub |
+          #!/bin/bash
+          yum install -y amazon-efs-utils
+          mkdir -p /mnt/efs
+          echo 'efs id: ' ${FileSystem}
+          sudo mount -t efs ${FileSystem}:/ /mnt/efs
+          echo "${FileSystem}:/ /mnt/efs efs defaults,_netdev 0 0" >> /etc/fstab
+
+Outputs:
+  FileSystemId:
+    Description: The ID of the EFS
+    Value: !Ref FileSystem
+  InstanceAId:
+    Description: The ID of the first EC2 instance
+    Value: !Ref EC2InstanceA
+  InstanceBId:
+    Description: The ID of the second EC2 instance
+    Value: !Ref EC2InstanceB

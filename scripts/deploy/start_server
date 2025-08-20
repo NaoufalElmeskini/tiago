@@ -1,0 +1,12 @@
+#!/bin/bash
+echo "starting server"
+touch /home/ec2-user/server.log
+sudo chmod 664 /home/ec2-user/server.log
+java -jar /home/ec2-user/aws-ec2-spring-api-0.1.jar >> /home/ec2-user/server.log 2>&1 < /dev/null &
+
+# > : STDOUT sortie standard
+# 2>: STDERR
+# < : STDIN
+# satisfaire codeDeploy : Fermer explicitement STDOUT et STDERR
+exec 1>&-
+exec 2>&-

@@ -1,0 +1,113 @@
+# Prérequis : variable d'environnement 'GH_AWS_PAT' contenant le Public Access Token (Github)
+#
+# Usage :
+##$ aws cloudformation create-stack
+## --stack-name someStack
+## --template-body file://C:\path_to_template\codeBuildResource.yml
+## --parameters ParameterKey=GithubPAT,ParameterValue=$env:GH_AWS_PAT
+## --capabilities CAPABILITY_IAM
+---
+Parameters:
+  CodeBuildProjectName:
+    Type: String
+    Description: CodeBuild project name
+    Default: code-build-standard
+  ArtifactS3Bucket:
+    Type: String
+    Description: name of the S3 bucket
+    Default: cb-cfn-bucket
+  GithubRepo:
+    Type: String
+    Description: Github repository to build
+    Default: https://github.com/NaoufalElmeskini/ia-transcriber.git
+  GithubPAT:
+    Type: String
+    Description: github PAT to access source repository
+
+Resources:
+  CodeBuildSourceCredential:
+    Type: AWS::CodeBuild::SourceCredential
+    Properties:
+      AuthType: PERSONAL_ACCESS_TOKEN
+      ServerType: GITHUB
+      Token: !Ref GithubPAT
+  CodeBuildProject:
+    Type: AWS::CodeBuild::Project
+    Metadata:
+      cfn_nag:
+        rules_to_suppress:
+          - id: W32
+            reason: "skip using encryption value for demo purpose"
+    Properties:
+      Name: !Ref CodeBuildProjectName
+      ServiceRole: !Ref RoleForCodeBuild
+      Artifacts:
+        Type: S3
+        Location: !Ref ArtifactS3Bucket
+        Packaging: ZIP
+      Environment:
+        Type: LINUX_CONTAINER
+        Image: aws/codebuild/amazonlinux2-x86_64-standard:5.0
+        ComputeType: BUILD_GENERAL1_SMALL
+        PrivilegedMode: false
+      LogsConfig:
+        CloudWatchLogs:
+          Status: ENABLED
+          GroupName: /aws/codebuild/debug
+      Source:
+        Auth:
+          Resource: !Ref CodeBuildSourceCredential
+          Type: OAUTH
+        Type: GITHUB
+        Location: !Ref GithubRepo
+        GitCloneDepth: 1
+        BuildSpec: buildspec.yml
+      Triggers:
+        Webhook: true
+        FilterGroups:
+          - - Type: EVENT
+              Pattern: PUSH
+            - Type: HEAD_REF
+              Pattern: ^refs/heads/main$
+          - - Type: EVENT
+              Pattern: PUSH
+            - Type: HEAD_REF
+              Pattern: ^refs/heads/feat/.*
+      Cache:
+        Type: NO_CACHE
+      Tags:
+        - Key: name
+          Value: !Ref CodeBuildProjectName
+  RoleForCodeBuild:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+          - Action: sts:AssumeRole
+            Effect: Allow
+            Principal:
+              Service: codebuild.amazonaws.com
+#              fixme: vulnérabilité (*)
+      Policies:
+        - PolicyName: CodeBuildAccess
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Action:
+                  - 'logs:CreateLogGroup'
+                  - 'logs:PutLogEvents'
+                  - 'logs:CreateLogStream'
+                  - 'ecr:*'
+                  - 's3:GetBucketAcl'
+                  - 's3:PutObject'
+                  - 's3:GetObject'
+                  - 's3:GetBucketLocation'
+                  - 's3:GetObjectVersion'
+                  - 'codebuild:CreateReportGroup'
+                  - 'codebuild:CreateReport'
+                  - 'codebuild:UpdateReport'
+                  - 'codebuild:BatchPutCodeCoverages'
+                  - 'codebuild:BatchPutTestCases'
+                  - 'ssm:GetParameters'
+                Effect: Allow
+                Resource: '*'

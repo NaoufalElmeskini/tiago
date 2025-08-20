@@ -1,0 +1,17 @@
+#CodeBuild main file
+version: 0.1
+
+phases:
+  build:
+    commands:
+      - echo Build started on `date`
+  post_build:
+    commands:
+      - echo starting post_build
+      - echo Build completed on `date`
+      - mvn clean package -DskipTests
+artifacts:
+  files:
+    - target/aws-ec2-spring-api-0.1.jar
+    - scripts/deploy/*
+    - appspec.yml
