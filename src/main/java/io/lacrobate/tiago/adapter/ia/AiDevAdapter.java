@@ -12,7 +12,7 @@ import java.util.Date;
 
 @Service
 @Qualifier("eventExtractor")
-@Profile("dev")
+@Profile("!production")
 @Slf4j
 public class AiDevAdapter implements AiModelPort {
 
@@ -22,7 +22,7 @@ public class AiDevAdapter implements AiModelPort {
     }
 
     public static Event event() {
-        DateTime start = dateTime(2025, 5, 28, 10); // Date de début: 28 mai 2025 à 10h00
+        DateTime start = dateTime(2025, 5,  28, 10); // Date de début: 28 mai 2025 à 10h00
         DateTime end = dateTime(2025, 5, 28, 18); // Date de fin: 28 mai 2025 à 18h00
 
         return Event.builder()
