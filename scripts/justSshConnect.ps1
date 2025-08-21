@@ -7,11 +7,11 @@
 # a simple conversion is necessary to create one from an other (probably .pem to .ppk)
 ####################################
 
-if (!$env:AWS_Op_SSH_KEY) {
-    Write-Host "/!\ environnement variable not found: 'AWS_Op_SSH_KEY'"
+if (!$env:AWS_SSH_PEM_KEY) {
+    Write-Host "/!\ environnement variable not found: 'AWS_SSH_KEY'"
     exit
 }
 
-echo "certificate : " $env:AWS_Op_SSH_KEY
+echo "certificate : " $env:AWS_SSH_PEM_KEY
 
-ssh -i $env:AWS_Op_SSH_KEY ec2-user@$env:AWS_EC2_URL
+ssh -i $env:AWS_SSH_PEM_KEY ec2-user@$env:AWS_EC2_URL

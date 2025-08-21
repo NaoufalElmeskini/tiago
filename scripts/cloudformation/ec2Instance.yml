@@ -30,22 +30,28 @@ Resources:
         - !Ref ServerSecurityGroup
       UserData: !Base64
         "Fn::Join": [ "\n", [ "#!/bin/bash -xe",
-                              "sudo yum install java-17-amazon-corretto -y",
+                              "sudo yum install java-21-amazon-corretto.x86_64 -y",
                               "echo java installed!",
-                              "wget http://mirror.olnevhost.net/pub/apache/maven/maven-3/3.9.9/binaries/apache-maven-3.9.9-bin.tar.gz",
-                              "tar xvf apache-maven-3.9.9-bin.tar.gz",
+                              "wget http://mirror.olnevhost.net/pub/apache/maven/maven-3/3.9.11/binaries/apache-maven-3.9.11-bin.tar.gz",
+                              "tar xvf apache-maven-3.9.11-bin.tar.gz",
                               "sudo mkdir /usr/local/apache-maven",
-                              "sudo mv apache-maven-3.9.9 /usr/local/apache-maven/",
-                              "rm apache-maven-3.9.9-bin.tar.gz",
+                              "sudo mv apache-maven-3.9.11 /usr/local/apache-maven/",
+                              "rm apache-maven-3.9.11-bin.tar.gz",
                               "## globaliser la commande $mvn",
-                              "sudo ln -sf /usr/local/apache-maven/apache-maven-3.9.9/bin/mvn /usr/bin/mvn",
+                              "sudo ln -sf /usr/local/apache-maven/apache-maven-3.9.11/bin/mvn /usr/bin/mvn",
                               "echo maven installed!",
                               "sudo yum update",
                               "sudo yum install ruby -y",
                               "wget https://aws-codedeploy-eu-west-3.s3.eu-west-3.amazonaws.com/latest/install",
                               "chmod +x ./install",
                               "sudo ./install auto",
-                              "sudo service codedeploy-agent status"],
+                              "sudo service codedeploy-agent status",
+
+                              "echo 'export bot_receiverid=\"8138086070\"' | sudo tee -a /etc/profile.d/custom_env.sh",
+                              "echo 'export bot_token=\"7608773156:AAGqibFeRqaCAFEkhC-554bF7BWQEEdxmpE\"' | sudo tee -a /etc/profile.d/custom_env.sh",
+                              "echo 'export bot_username=\"tintinHelloBot\"' | sudo tee -a /etc/profile.d/custom_env.sh",
+                              "sudo chmod +x /etc/profile.d/custom_env.sh"
+        ],
         ]
 
   # our EC2 security group
@@ -79,3 +85,7 @@ Resources:
           FromPort: 8080
           CidrIp: 0.0.0.0/0
           ToPort: 8080
+Outputs:
+  InstancePublicDNS:
+    Description: The ID of the first EC2 instance
+    Value: !GetAtt MyInstance.PublicDnsName
